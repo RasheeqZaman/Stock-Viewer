@@ -4,12 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
+import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    ViewPager viewPager;
+    StockTopAdapter adapter;
+    List<StockModel> models;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +28,19 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        models = new ArrayList<>();
+        models.add(new StockModel("ACI", 250.50, 4.20, 1.65, false));
+        models.add(new StockModel("ACMELAB", 72.20, 0.50, 0.69, false));
+        models.add(new StockModel("AGRANINS", 36.00, 0.50, 1.41, true));
+        models.add(new StockModel("AIL", 31.30, 0.10, 0.32, false));
+        models.add(new StockModel("AIBL1STMF", 7.70, 0.10, 1.32, true));
+
+        adapter = new StockTopAdapter(models, this);
+
+        viewPager = findViewById(R.id.top_viewpager);
+        viewPager.setAdapter(adapter);
+        viewPager.setPadding(130, 0, 130, 0);
     }
 
     @Override
