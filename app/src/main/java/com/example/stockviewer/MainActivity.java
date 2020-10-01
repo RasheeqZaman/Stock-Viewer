@@ -7,11 +7,14 @@ import androidx.core.view.MenuItemCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setPadding(130, 0, 130, 0);
 
         viewPager.addOnPageChangeListener(new CircularViewPagerHandler(viewPager));
+
+        autoSlideViewPager(viewPager, models.size());
+    }
+
+    private void autoSlideViewPager(ViewPager viewPager, int totalItems) {
+        Timer timer = new Timer(); // At this line a new Thread will be created
+        timer.scheduleAtFixedRate(new SliderTask(viewPager, totalItems), 0, 3*1000);
     }
 
     @Override
@@ -52,5 +62,25 @@ public class MainActivity extends AppCompatActivity {
         MenuItem search = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) search.getActionView();
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public class SliderTask extends TimerTask {
+        private ViewPager viewPager;
+        private int totalItems;
+
+        public SliderTask(ViewPager viewPager, int totalItems) {
+            this.viewPager = viewPager;
+            this.totalItems = totalItems;
+        }
+
+        @Override
+        public void run() {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    int itemIndex = (viewPager.getCurrentItem() + 1) % totalItems;
+                    viewPager.setCurrentItem(itemIndex);
+                }
+            });
+        }
     }
 }
