@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.top_viewpager);
         viewPager.setAdapter(adapter);
         viewPager.setPadding(130, 0, 130, 0);
+
+        viewPager.addOnPageChangeListener(new CircularViewPagerHandler(viewPager));
     }
 
     @Override
