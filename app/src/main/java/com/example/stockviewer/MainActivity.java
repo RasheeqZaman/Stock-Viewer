@@ -15,6 +15,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     StockTopAdapter adapter;
-    List<StockModel> models;
+    List<List<StockModel>> models;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +38,27 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        models = new ArrayList<>();
-        models.add(new StockModel("ACI", 250.50, 4.20, 1.65, false));
-        models.add(new StockModel("ACMELAB", 72.20, 0.50, 0.69, false));
-        models.add(new StockModel("AGRANINS", 36.00, 0.50, 1.41, true));
-        models.add(new StockModel("AIL", 31.30, 0.10, 0.32, false));
-        models.add(new StockModel("AIBL1STMF", 7.70, 0.10, 1.32, true));
 
-        adapter = new StockTopAdapter(models, this);
+        String[] tabNames = new String[]{"All", "Recent", "Bookmark"};
+        models = new ArrayList<>();
+        for(int i=0; i<tabNames.length; i++){
+            models.add(new ArrayList<StockModel>());
+        }
+
+        models.get(0).add(new StockModel("ACI", 250.50, 4.20, 1.65, false));
+        models.get(0).add(new StockModel("ACMELAB", 72.20, 0.50, 0.69, false));
+        models.get(0).add(new StockModel("AGRANINS", 36.00, 0.50, 1.41, true));
+        models.get(0).add(new StockModel("AIL", 31.30, 0.10, 0.32, false));
+        models.get(0).add(new StockModel("AIBL1STMF", 7.70, 0.10, 1.32, true));
+
+        models.get(1).add(models.get(0).get(1));
+        models.get(1).add(models.get(0).get(4));
+
+        models.get(2).add(models.get(0).get(0));
+        models.get(2).add(models.get(0).get(2));
+        models.get(2).add(models.get(0).get(4));
+
+        adapter = new StockTopAdapter(models.get(0), this);
 
         viewPager = findViewById(R.id.top_viewpager);
         viewPager.setAdapter(adapter);
@@ -55,6 +70,29 @@ public class MainActivity extends AppCompatActivity {
 
         ImageButton playPauseBtn = (ImageButton)findViewById(R.id.play_pause);
         playPauseBtn.setOnClickListener(new PlayPauseSliderOnClickListener(playPauseBtn, timer, viewPager, models.size()));
+
+
+
+        TabLayout stockFragmentTabLayout = findViewById(R.id.stock_fragment_tab_layout);
+        for(String tabName : tabNames){
+            stockFragmentTabLayout.addTab(stockFragmentTabLayout.newTab().setText(tabName));
+        }
+
+        final ViewPager fragmentViewPager = findViewById(R.id.fragment_viewpager);
+        StockFragmentAdapter stockFragmentAdapter = new StockFragmentAdapter(getSupportFragmentManager(), models);
+        fragmentViewPager.setAdapter(stockFragmentAdapter);
+
+        fragmentViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(stockFragmentTabLayout));
+        stockFragmentTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                fragmentViewPager.setCurrentItem(tab.getPosition());
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
     }
 
     private Timer playSlideViewPager(ViewPager viewPager, int totalItems) {
