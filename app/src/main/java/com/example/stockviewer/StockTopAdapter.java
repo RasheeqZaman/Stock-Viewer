@@ -1,6 +1,7 @@
 package com.example.stockviewer;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,18 +10,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class StockTopAdapter extends PagerAdapter {
     private List<StockModel> models;
     private LayoutInflater layoutInflater;
+    private Context context;
 
     public StockTopAdapter(List<StockModel> models, Context context) {
         this.models = models;
         this.context = context;
     }
 
-    private Context context;
 
     @Override
     public int getCount() {
@@ -43,11 +48,17 @@ public class StockTopAdapter extends PagerAdapter {
         TextView topCompanyPriceChange = view.findViewById(R.id.top_company_price_change);
         TextView topCompanyPriceSign = view.findViewById(R.id.top_company_price_sign);
 
-        topCompanyName.setText(models.get(position).getCompanyName());
-        topCompanyPrice.setText(String.format("%.2f", models.get(position).getPrice()));
-        topCompanyPriceSign.setText(models.get(position).isPriceIncrease() ? "+" : "-");
-        topCompanyPriceChange.setText(String.format("%.2f", models.get(position).getPriceChange()) + " " + String.format("%.2f", models.get(position).getPriceChangePercent()) + "%");
-        topCompanyPriceChange.setCompoundDrawablesWithIntrinsicBounds(0, 0, models.get(position).isPriceIncrease() ? R.drawable.up : R.drawable.down, 0);
+        DecimalFormat formatter = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.US);
+        DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
+        symbols.setCurrencySymbol("");
+        formatter.setDecimalFormatSymbols(symbols);
+
+        StockModel model = models.get(position);
+        topCompanyName.setText(model.getCompanyName());
+        topCompanyPrice.setText(formatter.format(model.getPrice()));
+        topCompanyPriceSign.setText((model.getPriceChange()>0.0) ? "+" : (model.getPriceChange()<0.0 ? "-" : ""));
+        topCompanyPriceChange.setText(formatter.format(Math.abs(model.getPriceChange())) + " (" + formatter.format(model.getPriceChangePercent()) + "%)");
+        topCompanyPriceChange.setCompoundDrawablesWithIntrinsicBounds(0, 0, (model.getPriceChange()>0.0) ? R.drawable.up : (model.getPriceChange()<0.0 ? R.drawable.down : R.drawable.equal), 0);
 
         container.addView(view, 0);
         return view;

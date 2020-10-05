@@ -12,7 +12,6 @@ public class StockFragmentAdapter extends FragmentStatePagerAdapter {
 
     public StockFragmentAdapter(@NonNull FragmentManager fm, List<List<StockModel>> models) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-
         this.models = models;
     }
 

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -45,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
             models.add(new ArrayList<StockModel>());
         }
 
-        models.get(0).add(new StockModel("ACI", 250.50, 4.20, 1.65, false));
-        models.get(0).add(new StockModel("ACMELAB", 72.20, 0.50, 0.69, false));
-        models.get(0).add(new StockModel("AGRANINS", 36.00, 0.50, 1.41, true));
-        models.get(0).add(new StockModel("AIL", 31.30, 0.10, 0.32, false));
-        models.get(0).add(new StockModel("AIBL1STMF", 7.70, 0.10, 1.32, true));
+        models.get(0).add(new StockModel("ACI", 1250.503, -4.20, 1.65));
+        models.get(0).add(new StockModel("ACMELAB", 72.20, -0.50, 0.69));
+        models.get(0).add(new StockModel("AGRANINS", 36.00, 0.50, 1.41));
+        models.get(0).add(new StockModel("AIL", 31.30, 0.00, 0.32));
+        models.get(0).add(new StockModel("AIBL1STMF", 7.70, 0.10, 1.32));
 
         models.get(1).add(models.get(0).get(1));
         models.get(1).add(models.get(0).get(4));
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.addOnPageChangeListener(new CircularViewPagerHandler(viewPager));
 
-        Timer timer = playSlideViewPager(viewPager, models.size());
+        Timer timer = playSlideViewPager(viewPager, models.get(0).size());
 
         ImageButton playPauseBtn = (ImageButton)findViewById(R.id.play_pause);
         playPauseBtn.setOnClickListener(new PlayPauseSliderOnClickListener(playPauseBtn, timer, viewPager, models.size()));
@@ -93,6 +94,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {}
         });
+
+        /*ListView listView = findViewById(R.id.list_view1);
+        List<String> companyNames = new ArrayList<>();
+        for(StockModel model : models.get(0)){
+            companyNames.add(model.getCompanyName());
+        }
+        StockListAdapter stockListAdapter = new StockListAdapter(this, models.get(0), companyNames);
+        listView.setAdapter(stockListAdapter);*/
     }
 
     private Timer playSlideViewPager(ViewPager viewPager, int totalItems) {

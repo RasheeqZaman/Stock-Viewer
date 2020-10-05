@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/stock_list_item_background"
+        android:weightSum="5">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="3">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/company_icon"
+                android:background="@drawable/company_icon_background"
+                android:padding="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/stock_list_company_name"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:textSize="12dp"
+                android:textColor="#fff"
+                android:text="JAMUNABANK"
+                android:fontFamily="@font/secular_one_regular"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="bottom">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:textColor="#fff"
+                    android:text="৳"
+                    android:layout_marginRight="5dp"
+                    android:fontFamily="@font/secular_one_regular"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/stock_list_company_price"
+                    android:textSize="12dp"
+                    android:textColor="#fff"
+                    android:text="98.00"
+                    android:fontFamily="@font/secular_one_regular"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:textColor="#818cae"
+                    android:text="৳"
+                    android:layout_marginRight="5dp"
+                    android:fontFamily="@font/secular_one_regular"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/stock_list_company_price_change"
+                    android:textSize="12dp"
+                    android:textColor="#818cae"
+                    android:text="3.20"
+                    android:fontFamily="@font/secular_one_regular"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/stock_list_company_price_change_percent_layout"
+            android:background="@drawable/stock_list_item_percent_same_background"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/stock_list_company_price_change_percent"
+                android:textSize="12dp"
+                android:textColor="#fff"
+                android:text="15.50"
+                android:fontFamily="@font/secular_one_regular"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="#fff"
+                android:text="%"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/secular_one_regular"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

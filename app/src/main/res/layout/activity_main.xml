@@ -44,18 +44,20 @@
         android:layout_below="@+id/btn_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp">
+        android:layout_marginTop="10dp">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/stock_fragment_tab_layout"
             app:tabIndicatorColor="#f879b5"
             app:tabTextColor="#cbd0de"
             app:tabTextAppearance="@style/StockFragmentTabText"
+            android:layout_marginHorizontal="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager.widget.ViewPager
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/fragment_viewpager"/>

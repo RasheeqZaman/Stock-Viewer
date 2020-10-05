@@ -3,14 +3,12 @@ package com.example.stockviewer;
 public class StockModel {
     private String companyName;
     private double price, priceChange, priceChangePercent;
-    private boolean priceIncrease;
 
-    public StockModel(String companyName, double price, double priceChange, double priceChangePercent, boolean priceIncrease) {
+    public StockModel(String companyName, double price, double priceChange, double priceChangePercent) {
         this.companyName = companyName;
         this.price = price;
         this.priceChange = priceChange;
         this.priceChangePercent = priceChangePercent;
-        this.priceIncrease = priceIncrease;
     }
 
     public String getCompanyName() {
@@ -19,14 +17,6 @@ public class StockModel {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
-    }
-
-    public boolean isPriceIncrease() {
-        return priceIncrease;
-    }
-
-    public void setPriceIncrease(boolean priceIncrease) {
-        this.priceIncrease = priceIncrease;
     }
 
     public double getPrice() {
