@@ -1,6 +1,8 @@
 package com.example.stockviewer;
 
-public class StockModel {
+import java.io.Serializable;
+
+public class StockModel implements Serializable {
     private String companyName;
     private double price, priceChange, priceChangePercent;
 

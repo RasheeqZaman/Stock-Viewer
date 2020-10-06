@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/top_company_name"
                 android:text="JAMUNABANK"
-                android:fontFamily="@font/touche_light"
+                android:fontFamily="@font/secular_one_regular"
                 android:textSize="18dp"
                 android:gravity="center"
                 android:textColor="#fff"/>

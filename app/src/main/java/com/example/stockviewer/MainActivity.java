@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
@@ -73,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         playPauseBtn.setOnClickListener(new PlayPauseSliderOnClickListener(playPauseBtn, timer, viewPager, models.size()));
 
 
-
         TabLayout stockFragmentTabLayout = findViewById(R.id.stock_fragment_tab_layout);
         for(String tabName : tabNames){
             stockFragmentTabLayout.addTab(stockFragmentTabLayout.newTab().setText(tabName));
@@ -95,13 +93,6 @@ public class MainActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {}
         });
 
-        /*ListView listView = findViewById(R.id.list_view1);
-        List<String> companyNames = new ArrayList<>();
-        for(StockModel model : models.get(0)){
-            companyNames.add(model.getCompanyName());
-        }
-        StockListAdapter stockListAdapter = new StockListAdapter(this, models.get(0), companyNames);
-        listView.setAdapter(stockListAdapter);*/
     }
 
     private Timer playSlideViewPager(ViewPager viewPager, int totalItems) {
