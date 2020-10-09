@@ -3,12 +3,16 @@ package com.example.stockviewer;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -44,6 +48,28 @@ public class StockDetailsActivity extends AppCompatActivity {
         txtCompanyPriceSign.setText((model.getPriceChange()>0.0) ? "+" : (model.getPriceChange()<0.0 ? "-" : ""));
         txtCompanyPriceChange.setText(formatter.format(Math.abs(model.getPriceChange())) + " (" + formatter.format(model.getPriceChangePercent()) + "%)");
         txtCompanyPriceChange.setCompoundDrawablesWithIntrinsicBounds(0, 0, (model.getPriceChange()>0.0) ? R.drawable.up : (model.getPriceChange()<0.0 ? R.drawable.down : R.drawable.equal), 0);
+
+        String[] tabNames = new String[]{"Basic", "Market", "AGM"};
+        TabLayout detailFragmentTabLayout = findViewById(R.id.detail_fragment_tab_layout);
+        for(String tabName : tabNames){
+            detailFragmentTabLayout.addTab(detailFragmentTabLayout.newTab().setText(tabName));
+        }
+
+        final ViewPager detailFragmentViewPager = findViewById(R.id.detail_fragment_viewpager);
+        StockDetailFragmentAdapter fragmentAdapter = new StockDetailFragmentAdapter(getSupportFragmentManager(), model);
+        detailFragmentViewPager.setAdapter(fragmentAdapter);
+
+        detailFragmentViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(detailFragmentTabLayout));
+        detailFragmentTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                detailFragmentViewPager.setCurrentItem(tab.getPosition());
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
     }
 
     @Override

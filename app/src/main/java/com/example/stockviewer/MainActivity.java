@@ -18,8 +18,12 @@ import android.widget.ListView;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -45,11 +49,16 @@ public class MainActivity extends AppCompatActivity {
             models.add(new ArrayList<StockModel>());
         }
 
-        models.get(0).add(new StockModel("ACI", 1250.503, -4.20, 1.65));
-        models.get(0).add(new StockModel("ACMELAB", 72.20, -0.50, 0.69));
-        models.get(0).add(new StockModel("AGRANINS", 36.00, 0.50, 1.41));
-        models.get(0).add(new StockModel("AIL", 31.30, 0.00, 0.32));
-        models.get(0).add(new StockModel("AIBL1STMF", 7.70, 0.10, 1.32));
+        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.ENGLISH);
+        try {
+            models.get(0).add(new StockModel("ACI", "ACI Limited", "Equity", "100% 2019, 115% 2018, 115% 2017", "15% 2019, 3.50% 2018", "1R:1(At Par) 1997", "30-Jun", 250.00, 1, 0.40, 573.73, 10.0, 249.00, dateFormat.parse("Oct 07, 2020 11:40 AM")));
+            models.get(0).add(new StockModel("ACMELAB", "The ACME Laboratories Limited", "Equity", "35% 2019, 35% 2018", "-", "-", "30-Jun", 71.10, 1.1, 1.57, 2116.00, 10.0, 70.00, dateFormat.parse("Oct 07, 2020 12:28 PM")));
+            models.get(0).add(new StockModel("AGRANINS", "Agrani Insurance Co. Ltd.", "Equity", "10% 2019, 5% 2017", "5% 2018, 5% 2017", "n/a", "31-Dec", 38.00,  	0.9, 2.43, 302.45, 10.0, 37.50, dateFormat.parse("Oct 07, 2020 12:32 PM")));
+            models.get(0).add(new StockModel("AIL", "Alif Industries Limited", "Equity", "3% 2019, 25% 2018", "7% 2019, 10% 2018", "-", "30-Jun", 33.00, 0.4, 1.23, 442.52, 10.0, 32.90, dateFormat.parse("Oct 08, 2020 4:00 PM")));
+            models.get(0).add(new StockModel("AIBL1STMF", "AIBL 1st Islamic Mutual Fund", "Mutual Fund", "8% 2019, 8% 2018", "-", "-", "31-Mar", 7.90, -0.1, 1.25, 1000.00, 10.0, 8.10, dateFormat.parse("Oct 08, 2020 4:00 PM")));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         models.get(1).add(models.get(0).get(1));
         models.get(1).add(models.get(0).get(4));

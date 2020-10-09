@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StockDetailMarketFragment">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#88ffffff"
+                android:text="Last Trading Price"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:id="@+id/detail_last_trading_price"
+                android:text="5.60"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#88ffffff"
+                android:text="Last Update"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:id="@+id/detail_last_update"
+                android:text="4:00 PM"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#88ffffff"
+                android:text="Change"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:id="@+id/detail_company_price_change_fragment"
+                android:text="-0.1 (-1.75%)"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#88ffffff"
+                android:text="Opening Price"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:id="@+id/detail_opening_price"
+                android:text="5.70"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

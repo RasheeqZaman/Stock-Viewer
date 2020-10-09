@@ -49,7 +49,8 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/stock_fragment_tab_layout"
             app:tabIndicatorColor="#f879b5"
-            app:tabTextColor="#cbd0de"
+            app:tabTextColor="#55ffffff"
+            app:tabSelectedTextColor="#fff"
             app:tabTextAppearance="@style/StockFragmentTabText"
             android:layout_marginHorizontal="20dp"
             android:layout_width="match_parent"

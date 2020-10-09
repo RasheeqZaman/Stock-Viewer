@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StockDetailAgmFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#88ffffff"
+                android:text="Cash Dividend"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:id="@+id/detail_cash_dividend"
+                android:text="3% 2019, 2% 2018, 2% 2017"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#88ffffff"
+                android:text="Stock Dividend"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:id="@+id/detail_stock_dividend"
+                android:text="6%RIU 2018, 10%RIU 2017"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#88ffffff"
+                android:text="Right Issue"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:id="@+id/detail_right_issue"
+                android:text="-"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#88ffffff"
+                android:text="Year End"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:id="@+id/detail_year_end"
+                android:text="30-Jun"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

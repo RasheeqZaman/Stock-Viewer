@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StockDetailBasicFragment">
+    
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#88ffffff"
+                android:text="Company Name"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:id="@+id/detail_company_full_name"
+                android:text="First Janata Bank Mutual Fund"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#88ffffff"
+                android:text="PAID-UP CAPITAL (MN)"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:id="@+id/detail_paid_up_capital"
+                android:text="2,899.23"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#88ffffff"
+                android:text="FACE/PAR VALUE"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:id="@+id/detail_face_par_value"
+                android:text="10.0"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#88ffffff"
+                android:text="TYPE OF INSTRUMENT"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:fontFamily="@font/hindvadodara_semibold"
+                android:textSize="13dp"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:id="@+id/detail_type_of_instrument"
+                android:text="Mutual Fund"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

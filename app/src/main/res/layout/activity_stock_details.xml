@@ -22,7 +22,7 @@
             android:id="@+id/detail_company_name"
             android:text="JAMUNABANK"
             android:fontFamily="@font/secular_one_regular"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:gravity="center"
             android:textColor="#fff"/>
 
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="৳"
                 android:textColor="#fff"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:layout_marginRight="10dp"/>
 
             <TextView
@@ -48,7 +48,7 @@
                 android:text="72.00"
                 android:fontFamily="@font/touche_light"
                 android:textColor="#fff"
-                android:textSize="50sp"/>
+                android:textSize="35sp"/>
 
         </LinearLayout>
 
@@ -64,7 +64,7 @@
                 android:id="@+id/detail_company_price_sign"
                 android:text="-"
                 android:textColor="#fff"
-                android:textSize="25sp"
+                android:textSize="18sp"
                 android:layout_marginRight="5dp"/>
 
             <TextView
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:text="৳"
                 android:textColor="#fff"
-                android:textSize="25sp"
+                android:textSize="15sp"
                 android:layout_marginRight="2dp"/>
 
             <TextView
@@ -85,7 +85,7 @@
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/touche_light"
                 android:textColor="#fff"
-                android:textSize="25sp"/>
+                android:textSize="15sp"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -93,5 +93,67 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/detail_viewpager_tab_layout"
+        android:layout_below="@+id/detail_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/detail_fragment_tab_layout"
+            app:tabIndicatorColor="#f879b5"
+            app:tabTextColor="#55ffffff"
+            app:tabSelectedTextColor="#fff"
+            app:tabTextAppearance="@style/StockFragmentTabText"
+            android:layout_marginHorizontal="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/detail_fragment_viewpager"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/detail_viewpager_tab_layout"
+        android:orientation="horizontal"
+        android:layout_marginVertical="5dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/hindvadodara_semibold"
+            android:textSize="13dp"
+            android:textAllCaps="true"
+            android:textColor="#fff"
+            android:background="@drawable/detail_rounded_button"
+            android:padding="20dp"
+            android:layout_margin="10dp"
+            android:text="Open Link"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/hindvadodara_semibold"
+            android:textSize="13dp"
+            android:textAllCaps="true"
+            android:textColor="#fff"
+            android:background="@drawable/detail_rounded_button"
+            android:padding="20dp"
+            android:layout_margin="10dp"
+            android:text="Bookmark"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
