@@ -25,4 +25,5 @@ public class StockFragmentAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return models.size();
     }
+
 }

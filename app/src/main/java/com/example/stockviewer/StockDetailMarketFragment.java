@@ -37,7 +37,7 @@ public class StockDetailMarketFragment extends Fragment {
         symbols.setCurrencySymbol("");
         formatter.setDecimalFormatSymbols(symbols);
 
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm a");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("hh:mm a");
 
         txtLastTradingPrice.setText(formatter.format(model.getPrice()));
         txtLastUpdate.setText(dateFormatter.format(model.getLastUpdateTime()));

@@ -25,6 +25,23 @@ public class StockModel implements Serializable {
         this.lastUpdateTime = lastUpdateTime;
     }
 
+    public StockModel(String companyName, double price, double priceChange, double priceChangePercent){
+        this.companyName = companyName;
+        this.price = price;
+        this.priceChange = priceChange;
+        this.priceChangePercent = priceChangePercent;
+        this.companyFullName = "";
+        this.typeOfInstrument = "";
+        this.cashDividend = "";
+        this.stockDividend = "";
+        this.rightIssue = "";
+        this.yearEnd = "";
+        this.paidUpCapital = 0.0;
+        this.faceParValue = 0.0;
+        this.openingPrice = 0.0;
+        this.lastUpdateTime = new Date();
+    }
+
     public String getCompanyName() {
         return companyName;
     }
