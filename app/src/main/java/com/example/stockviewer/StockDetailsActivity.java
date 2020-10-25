@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -38,6 +40,7 @@ public class StockDetailsActivity extends AppCompatActivity {
     ViewPager detailFragmentViewPager;
     ProgressBar progressBar;
     StockModel model;
+    String stockUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,8 @@ public class StockDetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         model = (StockModel) intent.getSerializableExtra("Model");
+
+        stockUrl = "https://www.dsebd.org/displayCompany.php?name="+model.getCompanyName();
 
         TextView txtCompanyName = findViewById(R.id.detail_company_name);
         TextView txtCompanyPrice = findViewById(R.id.detail_company_price);
@@ -95,6 +100,15 @@ public class StockDetailsActivity extends AppCompatActivity {
 
         WebContent content = new WebContent();
         content.execute();
+
+        Button btnOpenLink = findViewById(R.id.btn_open_link);
+        btnOpenLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(stockUrl));
+                startActivity(browserIntent);
+            }
+        });
     }
 
     @Override
@@ -170,7 +184,7 @@ public class StockDetailsActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                updateStockModel("https://www.dsebd.org/displayCompany.php?name="+model.getCompanyName());
+                updateStockModel(stockUrl);
             } catch (IOException | ParseException e) {
                 e.printStackTrace();
                 Log.d("alright", e.getMessage());
