@@ -26,4 +26,8 @@ public class StockFragmentAdapter extends FragmentStatePagerAdapter {
         return models.size();
     }
 
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return POSITION_NONE;
+    }
 }

@@ -117,10 +117,7 @@ public class StockDetailsActivity extends AppCompatActivity {
         }
 
         private void updateStockModel(String url) throws IOException, ParseException {
-            Log.d("alright", "hello");
             Document document = Jsoup.connect(url).get();
-
-            Log.d("alright", document.title());
 
             DecimalFormat formatter = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.US);
             DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
