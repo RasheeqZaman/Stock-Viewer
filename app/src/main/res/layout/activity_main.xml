@@ -12,6 +12,13 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
 
+    <ListView
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:id="@+id/search_stock_list_view"/>
+
     <androidx.viewpager.widget.ViewPager
         android:foregroundGravity="center"
         android:id="@+id/top_viewpager"
@@ -44,6 +51,7 @@
         android:layout_below="@+id/btn_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/bottom_fragment_layout"
         android:layout_marginTop="10dp">
 
         <com.google.android.material.tabs.TabLayout

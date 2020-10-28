@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextSwitcher;
@@ -48,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
     StockTopAdapter adapter;
     Map<String, StockModel> modelsMap;
     List<List<StockModel>> models;
+    ListView searchListView;
+    ArrayAdapter searchAdapter;
+    List<String> companyNames;
 
     ProgressBar progressBar;
 
@@ -102,6 +109,24 @@ public class MainActivity extends AppCompatActivity {
             public void onTabUnselected(TabLayout.Tab tab) {}
             @Override
             public void onTabReselected(TabLayout.Tab tab) {}
+        });
+
+        searchListView = findViewById(R.id.search_stock_list_view);
+        companyNames = new ArrayList<>();
+        for(StockModel model : models.get(0)){
+            companyNames.add(model.getCompanyName());
+        }
+        searchAdapter = new ArrayAdapter<String>(this, R.layout.stock_list_search_item, companyNames);
+        searchListView.setAdapter(searchAdapter);
+
+        searchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String companyName = (String) searchAdapter.getItem(position);
+                Intent intent = new Intent(MainActivity.this, StockDetailsActivity.class);
+                intent.putExtra("Model", modelsMap.get(companyName));
+                startActivity(intent);
+            }
         });
 
         progressBar = findViewById(R.id.progress_bar);
@@ -203,6 +228,44 @@ public class MainActivity extends AppCompatActivity {
 
         MenuItem search = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) search.getActionView();
+
+        final LinearLayout btnLayout = findViewById(R.id.btn_layout);
+        final LinearLayout bottomFragmentLayout = findViewById(R.id.bottom_fragment_layout);
+
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchListView.setVisibility(View.VISIBLE);
+                viewPager.setVisibility(View.GONE);
+                btnLayout.setVisibility(View.GONE);
+                bottomFragmentLayout.setVisibility(View.GONE);
+            }
+        });
+
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                searchListView.setVisibility(View.GONE);
+                viewPager.setVisibility(View.VISIBLE);
+                btnLayout.setVisibility(View.VISIBLE);
+                bottomFragmentLayout.setVisibility(View.VISIBLE);
+                return false;
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchAdapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -264,6 +327,7 @@ public class MainActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
             viewPager.getAdapter().notifyDataSetChanged();
             fragmentViewPager.getAdapter().notifyDataSetChanged();
+            searchAdapter.notifyDataSetChanged();
         }
 
         private StockModel getPrimaryStockModel(String data) throws ParseException {
@@ -274,79 +338,6 @@ public class MainActivity extends AppCompatActivity {
 
             String[] datas = data.split(" ");
             return new StockModel(datas[0], formatter.parse(datas[1]).doubleValue(), formatter.parse(datas[2]).doubleValue(), Double.parseDouble(datas[3].substring(0, datas[3].length()-1)));
-        }
-
-        private StockModel getStockModel(String url) throws IOException, ParseException {
-            Log.d("alright", "hello");
-            Document document = Jsoup.connect(url).get();
-
-            Log.d("alright", document.title());
-
-            DecimalFormat formatter = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.US);
-            DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
-            symbols.setCurrencySymbol("");
-            formatter.setDecimalFormatSymbols(symbols);
-
-            DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.ENGLISH);
-
-
-            String webCompanyName = document.select("table#company").eq(0).select("tbody").select("tr").eq(0).select("th").eq(0).text();
-            String companyName = webCompanyName.split(" ")[2];
-            //Log.d("alright", companyName);
-
-            String companyFullName = document.select("h2.BodyHead").eq(0).select("i").text();
-            //Log.d("alright", companyFullName);
-
-            String webCompanyPrice = document.select("table#company").eq(1).select("tbody").select("tr").eq(0).select("td").eq(0).text();
-            Double companyPrice = formatter.parse(webCompanyPrice).doubleValue();
-            //Log.d("alright", Double.toString(companyPrice));
-
-            String webCompanyPriceChange = document.select("table#company").eq(1).select("tbody").select("tr").eq(2).select("td").eq(0).text();
-            Double companyPriceChange = formatter.parse(webCompanyPriceChange).doubleValue();
-            //Log.d("alright", Double.toString(companyPriceChange));
-
-            String webCompanyPriceChangePercent = document.select("table#company").eq(1).select("tbody").select("tr").eq(3).select("td").eq(0).text();
-            Double companyPriceChangePercent = Double.parseDouble(webCompanyPriceChangePercent.substring(0, webCompanyPriceChangePercent.length()-1));
-            //Log.d("alright", Double.toString(companyPriceChangePercent));
-
-            String webCompanyOpeningPrice = document.select("table#company").eq(1).select("tbody").select("tr").eq(4).select("td").eq(0).text();
-            Double companyOpeningPrice = formatter.parse(webCompanyOpeningPrice).doubleValue();
-            //Log.d("alright", Double.toString(companyOpeningPrice));
-
-            String webCompanyPaidUpCapital = document.select("table#company").eq(2).select("tbody").select("tr").eq(1).select("td").eq(0).text();
-            Double companyPaidUpCapital = formatter.parse(webCompanyPaidUpCapital).doubleValue();
-            //Log.d("alright", Double.toString(companyPaidUpCapital));
-
-            String webCompanyFaceParValue = document.select("table#company").eq(2).select("tbody").select("tr").eq(2).select("td").eq(0).text();
-            Double companyFaceParValue = formatter.parse(webCompanyFaceParValue).doubleValue();
-            //Log.d("alright", Double.toString(companyFaceParValue));
-
-            String companyTypeOfInstrument = document.select("table#company").eq(2).select("tbody").select("tr").eq(1).select("td").eq(1).text();
-            //Log.d("alright", companyTypeOfInstrument);
-
-            String webCompanyCashDividend = document.select("table#company").eq(3).select("tbody").select("tr").eq(0).select("td").eq(0).text();
-            String[] webCompanyCashDividends = webCompanyCashDividend.split(",");
-            String companyCashDividend = (webCompanyCashDividends.length>2) ? webCompanyCashDividends[0].trim() + ", " + webCompanyCashDividends[1].trim() : webCompanyCashDividend;
-            //Log.d("alright", companyCashDividend);
-
-            String webCompanyStockDividend = document.select("table#company").eq(3).select("tbody").select("tr").eq(1).select("td").eq(0).text();
-            String[] webCompanyStockDividends = webCompanyStockDividend.split(",");
-            String companyStockDividend = (webCompanyStockDividends.length>2) ? webCompanyStockDividends[0].trim() + ", " + webCompanyStockDividends[1].trim() : webCompanyStockDividend;
-            //Log.d("alright", companyStockDividend);
-
-            String companyRightIssue = document.select("table#company").eq(3).select("tbody").select("tr").eq(2).select("td").eq(0).text();
-            //Log.d("alright", companyRightIssue);
-
-            String companyYearEnd = document.select("table#company").eq(3).select("tbody").select("tr").eq(3).select("td").eq(0).text();
-            //Log.d("alright", companyYearEnd);
-
-            String companyDate = document.select("h2.BodyHead").eq(1).select("i").text();
-            String companyTime = document.select("table#company").eq(1).select("tbody").select("tr").eq(1).select("td").eq(0).text();
-            Date companyLastUpdateTime = dateFormat.parse(companyDate + " " + companyTime);
-            //Log.d("alright", companyLastUpdateTime.toString());
-
-            StockModel model = new StockModel(companyName, companyFullName, companyTypeOfInstrument, companyCashDividend, companyStockDividend, companyRightIssue, companyYearEnd, companyPrice, companyPriceChange, companyPriceChangePercent, companyPaidUpCapital, companyFaceParValue, companyOpeningPrice, companyLastUpdateTime);
-            return model;
         }
 
         @Override
@@ -365,6 +356,7 @@ public class MainActivity extends AppCompatActivity {
                     }else{
                         modelsMap.put(model.getCompanyName(), model);
                         models.get(0).add(model);
+                        companyNames.add(model.getCompanyName());
                     }
                 }
             } catch (IOException | ParseException e) {

@@ -55,4 +55,9 @@ public class StockListAdapter extends ArrayAdapter<String> {
 
         return itemRow;
     }
+
+    @Override
+    public int getCount() {
+        return models.size();
+    }
 }
