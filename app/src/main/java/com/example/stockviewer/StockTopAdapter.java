@@ -1,6 +1,7 @@
 package com.example.stockviewer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,16 @@ public class StockTopAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.top_item, container, false);
+
+        final int itemPosition = position;
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, StockDetailsActivity.class);
+                intent.putExtra("Model", models.get(itemPosition));
+                context.startActivity(intent);
+            }
+        });
 
         TextView topCompanyName = view.findViewById(R.id.top_company_name);
         TextView topCompanyPrice = view.findViewById(R.id.top_company_price);

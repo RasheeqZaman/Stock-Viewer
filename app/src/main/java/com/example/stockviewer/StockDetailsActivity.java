@@ -136,15 +136,6 @@ public class StockDetailsActivity extends AppCompatActivity {
         saveData.setData("Recent", model.getCompanyName());
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-
-        MenuItem search = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) search.getActionView();
-        return super.onCreateOptionsMenu(menu);
-    }
-
     private class WebContent extends AsyncTask<Void, Void, Void> {
 
         @Override

@@ -143,20 +143,19 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        /*Timer timer2 = new Timer();
+        Timer timer2 = new Timer();
         timer2.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        try {
-                            updateStockData();
-                        }catch (ParseException e){}
+                        Log.d("alright", "run: runed");
+                        WebContent content = new WebContent();
+                        content.execute();
                     }
                 });
             }
-        }, 5 * 1000, 5 * 1000);
-        */
+        }, 5 * 60 * 1000, 5 * 60 * 1000);
     }
 
     @Override
