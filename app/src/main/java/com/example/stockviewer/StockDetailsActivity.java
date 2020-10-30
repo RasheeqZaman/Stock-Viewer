@@ -34,6 +34,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class StockDetailsActivity extends AppCompatActivity {
@@ -107,6 +108,28 @@ public class StockDetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(stockUrl));
                 startActivity(browserIntent);
+            }
+        });
+
+        final SaveData saveData = new SaveData(this);
+        List<String> bookmarkCompanyNames = saveData.getData("Bookmark");
+        model.isBookmarked = bookmarkCompanyNames.contains(model.getCompanyName());
+
+        final Button btnBookMark = findViewById(R.id.btn_bookmark);
+        btnBookMark.setText((!model.isBookmarked) ? "Bookmark" : "Undo Bookmark");
+        btnBookMark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(model.isBookmarked){
+                    saveData.removeData("Bookmark", model.getCompanyName());
+                    btnBookMark.setText("Bookmark");
+                    model.isBookmarked = false;
+                }else{
+                    saveData.setData("Bookmark", model.getCompanyName());
+                    btnBookMark.setText("Undo Bookmark");
+                    model.isBookmarked = true;
+                }
+                Log.d("alright", "onClick: "+saveData.getData("Bookmark").toString());
             }
         });
     }

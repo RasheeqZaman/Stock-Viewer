@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     ListView searchListView;
     ArrayAdapter searchAdapter;
     List<String> companyNames;
+    SaveData saveData;
 
     ProgressBar progressBar;
 
@@ -133,6 +134,8 @@ public class MainActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.fade_in));
 
+        saveData = new SaveData(this);
+
         WebContent content = new WebContent();
         content.execute();
 
@@ -176,10 +179,6 @@ public class MainActivity extends AppCompatActivity {
 
     private List<StockModel> getBookmarkStockModels() {
         List<StockModel> models = new ArrayList<>();
-
-        models.add(modelsMap.get("ACI"));
-        models.add(modelsMap.get("AIL"));
-
         return models;
     }
 
@@ -344,7 +343,6 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             try {
                 Document document = Jsoup.connect("https://www.dsebd.org/").get();
-                //Elements companyLinks = document.select("div#RightBody").select("div.row").select("div").eq(1).select("div").eq(1).select("a.ab1");
                 Elements companyLinks = document.select("a.abhead");
                 for(Element e : companyLinks){
                     StockModel model = getPrimaryStockModel(e.text());
@@ -359,6 +357,16 @@ public class MainActivity extends AppCompatActivity {
                         companyNames.add(model.getCompanyName());
                     }
                 }
+
+                List<String> bookmarkCompanyNames = saveData.getData("Bookmark");
+                Log.d("alright", "doInBackground: "+bookmarkCompanyNames.toString());
+                models.get(2).clear();
+                for(String bcn : bookmarkCompanyNames){
+                    if(modelsMap.containsKey(bcn)){
+                        models.get(2).add(modelsMap.get(bcn));
+                    }
+                }
+
             } catch (IOException | ParseException e) {
                 e.printStackTrace();
                 Log.d("alright", e.getMessage());

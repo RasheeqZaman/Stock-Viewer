@@ -7,6 +7,7 @@ public class StockModel implements Serializable {
     private String companyName, companyFullName, typeOfInstrument, cashDividend, stockDividend, rightIssue, yearEnd;
     private double price, priceChange, priceChangePercent, paidUpCapital, faceParValue, openingPrice;
     private Date lastUpdateTime;
+    public boolean isBookmarked;
 
     public StockModel(String companyName, String companyFullName, String typeOfInstrument, String cashDividend, String stockDividend, String rightIssue, String yearEnd, double price, double priceChange, double priceChangePercent, double paidUpCapital, double faceParValue, double openingPrice, Date lastUpdateTime) {
         this.companyName = companyName;
@@ -23,6 +24,7 @@ public class StockModel implements Serializable {
         this.faceParValue = faceParValue;
         this.openingPrice = openingPrice;
         this.lastUpdateTime = lastUpdateTime;
+        isBookmarked = false;
     }
 
     public StockModel(String companyName, double price, double priceChange, double priceChangePercent){
@@ -40,6 +42,7 @@ public class StockModel implements Serializable {
         this.faceParValue = 0.0;
         this.openingPrice = 0.0;
         this.lastUpdateTime = new Date();
+        isBookmarked = false;
     }
 
     public String getCompanyName() {
