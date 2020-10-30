@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.d("alright", "onCreate: created");
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -157,6 +159,30 @@ public class MainActivity extends AppCompatActivity {
         */
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<String> bookmarkCompanyNames = saveData.getData("Bookmark");
+        Log.d("alright", "onResume: "+bookmarkCompanyNames.toString());
+        models.get(2).clear();
+        for(String bcn : bookmarkCompanyNames){
+            if(modelsMap.containsKey(bcn)){
+                models.get(2).add(modelsMap.get(bcn));
+            }
+        }
+
+        List<String> recentCompanyNames = saveData.getData("Recent");
+        Log.d("alright", "doInBackground: "+recentCompanyNames.toString());
+        models.get(1).clear();
+        for(int n=recentCompanyNames.size(), i=n-1; i>=0; i--){
+            if(modelsMap.containsKey(recentCompanyNames.get(i))){
+                models.get(1).add(modelsMap.get(recentCompanyNames.get(i)));
+            }
+        }
+
+        fragmentViewPager.getAdapter().notifyDataSetChanged();
+    }
+
     private List<StockModel> getStockDataFromWebsite(){
         List<StockModel> models = new ArrayList<>();
 
@@ -170,13 +196,6 @@ public class MainActivity extends AppCompatActivity {
         return models;
     }
 
-    private void updateStockData() throws ParseException {
-        DateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy hh:mm a", Locale.ENGLISH);
-        StockModel model = modelsMap.get("ACMELAB");
-        model.setPrice(350);
-        viewPager.getAdapter().notifyDataSetChanged();
-    }
-
     private List<StockModel> getBookmarkStockModels() {
         List<StockModel> models = new ArrayList<>();
         return models;
@@ -184,11 +203,6 @@ public class MainActivity extends AppCompatActivity {
 
     private List<StockModel> getRecentStockModels() {
         List<StockModel> models = new ArrayList<>();
-
-        models.add(modelsMap.get("ACI"));
-        models.add(modelsMap.get("AIBL1STMF"));
-        models.add(modelsMap.get("ACMELAB"));
-
         return models;
     }
 
@@ -364,6 +378,15 @@ public class MainActivity extends AppCompatActivity {
                 for(String bcn : bookmarkCompanyNames){
                     if(modelsMap.containsKey(bcn)){
                         models.get(2).add(modelsMap.get(bcn));
+                    }
+                }
+
+                List<String> recentCompanyNames = saveData.getData("Recent");
+                Log.d("alright", "doInBackground: "+recentCompanyNames.toString());
+                models.get(1).clear();
+                for(int n=recentCompanyNames.size(), i=n-1; i>=0; i--){
+                    if(modelsMap.containsKey(recentCompanyNames.get(i))){
+                        models.get(1).add(modelsMap.get(recentCompanyNames.get(i)));
                     }
                 }
 

@@ -132,6 +132,8 @@ public class StockDetailsActivity extends AppCompatActivity {
                 Log.d("alright", "onClick: "+saveData.getData("Bookmark").toString());
             }
         });
+
+        saveData.setData("Recent", model.getCompanyName());
     }
 
     @Override
